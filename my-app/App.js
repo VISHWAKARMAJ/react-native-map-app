@@ -9,12 +9,13 @@ import {
   FlatList,
   Text,
 } from 'react-native';
+import {Component} from "react";
 import MapView, { Marker } from 'react-native-maps';
 
 const DATA = [
   {
     id: 'a001',
-    name:"expressway charging - mariam enterprise",
+     title:"expressway charging - mariam enterprise",
     address: 'connaught place, delhi',
     distance:"2102",
     distance_metrics:"metres",
@@ -80,8 +81,15 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-       <View style={{position:"absolute"}}>
-        <TextInput plaseceHolder="hello"  />
+       <View style={{position:"absolute",marginTop:60, flexdirecation:"row", }}>
+       <Button
+            onPress={this.takeSnapshot}
+            title="add"
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"
+          />
+       <TextInput placeholder="type here..."   style={{ borderWidth: 4,  height:40,margin:40,padding:10}}/>
+
         </View>
         <MapView
           onPress={(e) => this.onMapPress(e)}
@@ -106,34 +114,49 @@ export default class App extends Component {
           ))}
         </MapView>
         <View style={{ borderWidth: 1, position: 'absolute', bottom: 0 }}>
+          
           <Image
             source={{ uri: this.state.snapShot }}
             style={{ height: 200, width: 200 , }}
           />
-         
          <Button
             onPress={this.takeSnapshot}
-            title="Learn More"
+            title="Teke screenshot"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
           /> 
-        
-        </View>
         <FlatList
-            // horizontal
+            horizontal
             data={DATA}
             renderItem={this.renderItem}
             keyExtractor={(item) => item.id}
             style={{height:200, width:200,}}            
           /> 
-         
+        </View>
+
+      <View style={{ borderWidth: 1, position: 'absolute', bottom: 0 }}>
+
+        <FlatList
+            horizontal
+            data={DATA}
+            renderItem={this.renderItem}
+            keyExtractor={(item) => item.id}
+            style={{height:200, width:200,}}            
+          /> 
+      </View>           
       </SafeAreaView>
-      
     );
   }
+
 }
 
 const styles = StyleSheet.create({
+  // mainContainer:{
+  //   justifyContent:"center",
+  //    alignItems:"center",
+  // position:"absolute",
+  // marginTop:600
+  // },
   container: {
     flex: 1,
     height:20,
